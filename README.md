@@ -1,20 +1,37 @@
-# users
-- name: string 
+|user| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|name|string|
 
-# tasks
-- title: string
-- content: string
-- deadline: date
-- priority: integer
-- status: integer
 
-# labels
-- label_name: string
+|task| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|title|string|
+|content|text|
+|deadline|date|
+|priority|integer|
+|status|integer|
 
-# my_tasks
-- user_id (FK)
-- task_id (FK)
 
-# labelings
-- task_id (FK)
-- label_id (FK)
+|label| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|labe_name|string|
+
+
+|my_task|
+|:----|
+|id|
+|user_id (FK)|
+|task_id (FK)|
+
+
+|labeling|
+|:----|
+|id|
+|task_id(FK)|
+|label_id(FK)|
