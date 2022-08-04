@@ -1,24 +1,37 @@
-# README
+|user| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|name|string|
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+|task| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|title|string|
+|content|text|
+|deadline|date|
+|priority|integer|
+|status|integer|
 
-* Ruby version
 
-* System dependencies
+|label| |
+|:----|:----|
+|Column|Type|
+|id|integer|
+|labe_name|string|
 
-* Configuration
 
-* Database creation
+|my_task|
+|:----|
+|id|
+|user_id (FK)|
+|task_id (FK)|
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|labeling|
+|:----|
+|id|
+|task_id(FK)|
+|label_id(FK)|
