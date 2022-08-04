@@ -1,5 +1,5 @@
-<h1>タスクの詳細</h1>
-<p>タイトル: <%= @task.title %></p>
-<p>内容: <%= @task.content %></p>
+<h1><%= t('view.task details') %></h1>
+<p><%= t('view.title') %>: <%= @task.title %></p>
+<p><%= t('view.content') %>: <%= @task.content %></p>
 
-<%= link_to "タスク一覧へ", tasks_path %>
+<%= link_to t('view.to task list'), tasks_path %>
