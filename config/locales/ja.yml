@@ -1,0 +1,21 @@
+ja:
+  view:
+    title: タイトル
+    content: 内容
+    create task: 登録する
+    edit task: タスクの編集
+    to task list: タスク一覧へ
+    task list: タスク一覧
+    task details: タスクの詳細
+    
+
+  activerecord:
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+
+  errors:
+    format: "%{message}"
+    messages: &errors_messages
+      blank: "%{attribute}を入力してください"
