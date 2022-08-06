@@ -15,13 +15,17 @@
     <%= form.label t('view.title') %>
     <%= form.text_field :title %>
   </div>
-  <div class="task_title">
+  <div class="task_content">
     <%= form.label t('view.content') %>
     <%= form.text_field :content %>
   </div>
   <div class="task_deadline">
     <%= form.label t('view.deadline') %>
     <%= form.date_field :deadline %>
+  </div>
+  <div class="task_status">
+    <%= form.label t('view.status') %>
+    <%= form.select :status, [["未着手", "未着手"], ["着手中", "未着中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
   </div>
   <%= form.submit t('view.create task') %>
 <% end %>
