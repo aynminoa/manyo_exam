@@ -10,6 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task_title', with: 'ライフに行く'
         fill_in 'task_content', with: 'キムチを買う'
+        fill_in 'task_deadline', with: Date
         click_on '登録する'
         expect(page).to have_content 'ライフに行く'
       end
@@ -27,12 +28,23 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '新しいタスクが一番上に表示される' do
         FactoryBot.create(:task, title: 'task1', content: 'content1')
         FactoryBot.create(:task, title: 'task2', content: 'content2')
-        FactoryBot.create(:task, title: 'task3', content: 'content3')
         visit tasks_path
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'task3'
-        expect(task_list[1]).to have_content 'task2'
-        expect(task_list[2]).to have_content 'task1'
+        expect(task_list[0]).to have_content 'test_title'
+        expect(task_list[1]).to have_content 'task1'
+        expect(task_list[2]).to have_content 'task2'
+      end
+    end
+      context 'タスクの終了期限でソートした場合' do
+      it '終了期限が遠いタスクが上部に表示される' do
+        FactoryBot.create(:task, title: 'task1', content: 'content1', deadline: '2022-08-10')
+        FactoryBot.create(:task, title: 'task2', content: 'content2', deadline: '2022-08-20')
+        visit tasks_path
+        click_on '終了期限でソートする'
+        sleep(2)
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content '2022-08-20'
+        expect(task_list[1]).to have_content '2022-08-10'
       end
     end
   end

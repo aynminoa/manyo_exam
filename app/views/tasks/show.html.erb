@@ -1,5 +1,6 @@
 <h1><%= t('view.task details') %></h1>
 <p><%= t('view.title') %>: <%= @task.title %></p>
 <p><%= t('view.content') %>: <%= @task.content %></p>
+<p><%= t('view.deadline') %>: <%= @task.deadline %></p>
 
 <%= link_to t('view.to task list'), tasks_path %>

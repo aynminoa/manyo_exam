@@ -2,12 +2,21 @@ ja:
   view:
     title: タイトル
     content: 内容
+    deadline: 終了期限
     create task: 登録する
     edit task: タスクの編集
     to task list: タスク一覧へ
     task list: タスク一覧
     task details: タスクの詳細
-    
+    show: 詳細
+    edit: 編集
+    destroy: 削除
+    new task: 新規作成
+
+  # messages:
+  #   destroy:
+  #     alert: "削除してよろしいですか？"
+
 
   activerecord:
     attributes:

@@ -5,18 +5,21 @@
   <tr>
     <th><%= t('view.title') %></th>
     <th><%= t('view.content') %></th>
+    <th><%= t('view.deadline') %></th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr class="task_row">
     <td><%= task.title %></td>
     <td><%= task.content %></td>
+    <td><%= task.deadline %></td>
 
-    <td><%= link_to '詳細', task %></td>
-    <td><%= link_to '編集', edit_task_path(task) %></td>
-    <td><%= link_to '削除', task, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
+    <td><%= link_to t('view.show'), task %></td>
+    <td><%= link_to t('view.edit'), edit_task_path(task) %></td>
+    <td><%= link_to t('view.destroy'), task, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
   </tr>
 <% end %>
 </table>
 
-<%= link_to '新規作成', new_task_path %>
+<%= link_to t('view.new task'), new_task_path %>
+<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>

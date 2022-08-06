@@ -19,5 +19,9 @@
     <%= form.label t('view.content') %>
     <%= form.text_field :content %>
   </div>
+  <div class="task_deadline">
+    <%= form.label t('view.deadline') %>
+    <%= form.date_field :deadline %>
+  </div>
   <%= form.submit t('view.create task') %>
 <% end %>
