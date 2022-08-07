@@ -8,7 +8,10 @@ class TasksController < ApplicationController
     end
 
     if params[:task].present?
-      if task_params[:title]
+      if task_params[:title] && task_params[:status]
+        @tasks = Task.search_title(task_params[:title])
+        @tasks = Task.search_status(task_params[:status])
+      elsif task_params[:title] && task_params[:status].empty?
         @tasks = Task.search_title(task_params[:title])
       elsif task_params[:status]
         @tasks = Task.search_status(task_params[:status])

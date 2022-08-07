@@ -25,7 +25,7 @@
   </div>
   <div class="task_status">
     <%= form.label t('view.status') %>
-    <%= form.select :status, Task.statuses.keys.to_a, {}, include_blank: "選択して下さい" %>
+    <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
   </div>
   <%= form.submit t('view.create task') %>
 <% end %>

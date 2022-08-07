@@ -1,16 +1,15 @@
 <h1><%= t('view.task list') %></h1>
 <p><%= notice %></p>
 
-<p>タスク名で検索</p>
+<p>タスク名</p>
 <%= form_with(url: tasks_path, scope: :task, method: :get, local: true) do |form| %>
   <%= form.text_field :title %>
-  <%= form.submit '検索' %>
-<% end %>
 
-<p>ステータス名で検索</p>
-<%= form_with(url: tasks_path, scope: :task, method: :get, local: true) do |form| %>
+<p>ステータス名</p>
   <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
-  <%= form.submit '検索' %>
+  <p>
+    <%= form.submit '検索' %>
+  </p>
 <% end %>
   
 <div>
