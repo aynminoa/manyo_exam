@@ -6,6 +6,12 @@
   <%= form.text_field :title %>
   <%= form.submit '検索' %>
 <% end %>
+
+<p>ステータス名で検索</p>
+<%= form_with(url: tasks_path, scope: :task, method: :get, local: true) do |form| %>
+  <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
+  <%= form.submit '検索' %>
+<% end %>
   
 <div>
   <table>
