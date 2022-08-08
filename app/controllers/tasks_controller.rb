@@ -7,11 +7,11 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(deadline: :desc)
     end
 
-    if params[:task].present?
-      if task_params[:title] && task_params[:status]
+    if params[:task]
+      if task_params[:title] && task_params[:status].present?
         @tasks = Task.search_title(task_params[:title])
         @tasks = Task.search_status(task_params[:status])
-      elsif task_params[:title] && task_params[:status].empty?
+      elsif task_params[:title]
         @tasks = Task.search_title(task_params[:title])
       elsif task_params[:status]
         @tasks = Task.search_status(task_params[:status])
