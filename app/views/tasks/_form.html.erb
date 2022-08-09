@@ -18,8 +18,10 @@
 <div class="task_deadline">
   <%= form.label t('view.deadline') %> <%= form.date_field :deadline %>
 </div>
-<div id="task_status">
-  <%= form.label t('view.status') %> <%= form.select :status,
-  Task.statuses.keys, include_blank: "選択して下さい" %>
+<div class="task_status">
+  <%= form.label t('view.status') %> <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
+</div>
+<div class="task_priority">
+  <%= form.label t('view.priority') %> <%= form.select :priority, Task.priorities.keys, include_blank: "選択して下さい" %>
 </div>
 <%= form.submit t('view.create task') %> <% end %>
