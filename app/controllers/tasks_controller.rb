@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     elsif params[:sort_priority]
       @tasks = Task.all.order(priority: :desc)
     end
-
+    
     if params[:task]
       if task_params[:title] && task_params[:status].present?
         @tasks = Task.title_status(task_params[:title], task_params[:status])
@@ -18,6 +18,7 @@ class TasksController < ApplicationController
         @tasks = Task.search_status(task_params[:status])
       end
     end
+    @tasks = @tasks.page(params[:page])
   end
 
   def show

@@ -43,3 +43,5 @@
 <%= link_to "優先順位でソートする", tasks_path(sort_priority: "true") %>
 <%= link_to t('view.task list'), tasks_path %>
 
+<%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+
