@@ -6,5 +6,5 @@ class Task < ApplicationRecord
 
   scope :search_title, -> (title){ where("title LIKE ?", "%#{title}%")}
   scope :search_status, -> (status){ where(status: status)}
-
+  scope :title_status, -> (title, status){where("title LIKE ?","%#{title}%").where(status: status)}
 end

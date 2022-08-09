@@ -1,31 +1,25 @@
-<%= form_with(model: @task, local: true) do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @task.errors.count %>件のエラーがあります。</h2>
-      <ul>
-
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="task_title">
-    <%= form.label t('view.title') %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="task_content">
-    <%= form.label t('view.content') %>
-    <%= form.text_field :content %>
-  </div>
-  <div class="task_deadline">
-    <%= form.label t('view.deadline') %>
-    <%= form.date_field :deadline %>
-  </div>
-  <div class="task_status">
-    <%= form.label t('view.status') %>
-    <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
-  </div>
-  <%= form.submit t('view.create task') %>
+<%= form_with(model: @task, local: true) do |form| %> <% if @task.errors.any? %>
+<div id="error_explanation">
+  <h2><%= @task.errors.count %>件のエラーがあります。</h2>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
 <% end %>
+
+<div class="task_title">
+  <%= form.label t('view.title') %> <%= form.text_field :title %>
+</div>
+<div class="task_content">
+  <%= form.label t('view.content') %> <%= form.text_field :content %>
+</div>
+<div class="task_deadline">
+  <%= form.label t('view.deadline') %> <%= form.date_field :deadline %>
+</div>
+<div id="task_status">
+  <%= form.label t('view.status') %> <%= form.select :status,
+  Task.statuses.keys, include_blank: "選択して下さい" %>
+</div>
+<%= form.submit t('view.create task') %> <% end %>

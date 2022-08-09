@@ -30,9 +30,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task, title: 'task2', content: 'content2')
         visit tasks_path
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'test_title'
+        expect(task_list[0]).to have_content 'task2'
         expect(task_list[1]).to have_content 'task1'
-        expect(task_list[2]).to have_content 'task2'
       end
     end
       context 'タスクの終了期限でソートした場合' do
@@ -57,4 +56,33 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+  describe '検索機能' do
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        fill_in 'task_title', with: 'test'
+        click_on '検索'
+        expect(page).to have_content 'test'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        select '完了', from: 'task_status'
+        expect(page).to have_content '完了'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        FactoryBot.create(:task)
+        visit tasks_path
+        fill_in 'task_title', with: 'test'
+        select '未着手', from: 'task_status'
+        click_on '検索'
+        expect(page).to have_content 'test'
+        expect(page).to have_content '未着手'
+      end
+    end
+  end
+
 end
