@@ -46,6 +46,18 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[1]).to have_content '2022-08-10'
       end
     end
+      context 'タスクの優先順位でソートした場合' do
+      it '優先順位が高いタスクが上部に表示される' do
+        FactoryBot.create(:task, title: 'task1', content: 'content1', priority: '低')
+        FactoryBot.create(:task, title: 'task2', content: 'content2', priority: '高')
+        visit tasks_path
+        click_on '優先順位でソートする'
+        sleep(2)
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content '高'
+        expect(task_list[1]).to have_content '低'
+      end
+    end
   end
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
