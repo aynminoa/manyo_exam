@@ -39,7 +39,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task, title: 'task1', content: 'content1', deadline: '2022-08-10')
         FactoryBot.create(:task, title: 'task2', content: 'content2', deadline: '2022-08-20')
         visit tasks_path
-        click_on '終了期限でソートする'
+        click_on '終了期限でソート'
         sleep(2)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content '2022-08-20'
@@ -51,7 +51,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task, title: 'task1', content: 'content1', priority: '低')
         FactoryBot.create(:task, title: 'task2', content: 'content2', priority: '高')
         visit tasks_path
-        click_on '優先順位でソートする'
+        click_on '優先順位でソート'
         sleep(2)
         task_list = all('.task_row')
         expect(task_list[0]).to have_content '高'
