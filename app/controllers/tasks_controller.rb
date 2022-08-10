@@ -3,6 +3,22 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all.order(created_at: :desc)
+    if params[:sort_expired]
+      @tasks = Task.all.order(deadline: :desc)
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :desc)
+    end
+    
+    if params[:task]
+      if task_params[:title] && task_params[:status].present?
+        @tasks = Task.title_status(task_params[:title], task_params[:status])
+      elsif task_params[:title]
+        @tasks = Task.search_title(task_params[:title])
+      elsif task_params[:status]
+        @tasks = Task.search_status(task_params[:status])
+      end
+    end
+    @tasks = @tasks.page(params[:page])
   end
 
   def show
@@ -30,7 +46,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "タスクを更新しました" 
+      redirect_to tasks_path, notice: "タスクを更新しました"
     else
       render :edit
     end
@@ -48,7 +64,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority)
   end
 
 end

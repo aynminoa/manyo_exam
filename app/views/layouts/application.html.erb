@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <header class="">
+      <nav class="nav bg-primary p-3 mb-5">
+          <%= link_to t('view.new task'), new_task_path, class: "nav-link text-white" %>
+          <%= link_to "終了期限でソート", tasks_path(sort_expired: "true"), class: "nav-link text-white" %>
+          <%= link_to "優先順位でソート", tasks_path(sort_priority: "true"), class: "nav-link text-white" %>
+          <%= link_to t('view.task list'), tasks_path, class: "nav-link text-white" %>
+      </nav> 
+    </header>
+    <div class="container">
+
     <%= yield %>
+
+    </div>
   </body>
 </html>

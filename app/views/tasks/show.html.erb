@@ -1,5 +1,28 @@
 <h1><%= t('view.task details') %></h1>
-<p><%= t('view.title') %>: <%= @task.title %></p>
-<p><%= t('view.content') %>: <%= @task.content %></p>
 
-<%= link_to t('view.to task list'), tasks_path %>
+<table class="table table-borderless mb-5">
+
+  <tr>
+    <td class="col-2"><%= t('view.title') %></td>
+    <td class="col-10"><%= @task.title %></td>
+  </tr>
+  <tr>
+    <td><%= t('view.content') %></td>
+    <td><%= @task.content %></td>
+  </tr>
+<tr>
+  <td><%= t('view.deadline') %></td>
+  <td><%= @task.deadline %></td>
+</tr>
+<tr>
+  <td><%= t('view.status') %></td>
+  <td><%= @task.status %></td>
+</tr>
+<tr>
+  <td><%= t('view.priority') %></td>
+  <td><%= @task.priority %></td>
+</tr>
+
+</table>
+
+<%= link_to t('view.to task list'), tasks_path, class: "btn btn-primary" %>
