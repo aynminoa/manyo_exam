@@ -9,19 +9,28 @@
 </div>
 <% end %>
 
-<div class="task_title">
-  <%= form.label t('view.title') %> <%= form.text_field :title %>
-</div>
-<div class="task_content">
-  <%= form.label t('view.content') %> <%= form.text_field :content %>
-</div>
-<div class="task_deadline">
-  <%= form.label t('view.deadline') %> <%= form.date_field :deadline %>
-</div>
-<div class="task_status">
-  <%= form.label t('view.status') %> <%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %>
-</div>
-<div class="task_priority">
-  <%= form.label t('view.priority') %> <%= form.select :priority, Task.priorities.keys, include_blank: "選択して下さい" %>
-</div>
-<%= form.submit t('view.create task') %> <% end %>
+<table class="table table-borderless mb-4">
+  <tr class="task_title">
+    <td class="col-2"><%= form.label t('view.title') %></td>
+    <td class="col-10"><%= form.text_field :title %></td>
+  </tr>
+  <tr class="task_content">
+    <td><%= form.label t('view.content') %></td>
+    <td><%= form.text_field :content %></td>
+  </tr>
+  <tr class="task_deadline">
+    <td><%= form.label t('view.deadline') %></td>
+    <td><%= form.date_field :deadline %></td>
+  </tr>
+  <tr class="task_status">
+    <td><%= form.label t('view.status') %></td>
+    <td><%= form.select :status, Task.statuses.keys, include_blank: "選択して下さい" %></td>
+  </tr>
+  <tr class="task_priority">
+    <td><%= form.label t('view.priority') %></td>
+    <td><%= form.select :priority, Task.priorities.keys, include_blank: "選択して下さい" %></td>
+  </tr>
+
+</table>
+<%= form.submit t('view.create task'), class: "btn btn-outline-dark mb-3" %>
+<% end %>
