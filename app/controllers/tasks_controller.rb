@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  before_action :authenticate_user, only: %i[new]
 
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = current_user.tasks.order(created_at: :desc)
     if params[:sort_expired]
-      @tasks = Task.all.order(deadline: :desc)
+      @tasks = current_user.tasks.order(deadline: :desc)
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: :desc)
+      @tasks = current_user.tasks.order(priority: :desc)
     end
     
     if params[:task]
@@ -36,7 +37,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to task_path(@task), notice: "登録が完了しました"
     else
@@ -65,6 +66,12 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :content, :deadline, :status, :priority)
+  end
+
+  def authenticate_user
+    unless @user = current_user
+      redirect_to tasks_path
+    end
   end
 
 end
