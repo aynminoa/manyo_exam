@@ -19,6 +19,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = current_user.tasks.order(created_at: :desc)
+  end
+
+  def destroy
+    @task.destroy
+      redirect_to user_path, notice: "タスクを削除しました"
   end
 
   private

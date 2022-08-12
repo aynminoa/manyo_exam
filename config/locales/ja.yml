@@ -25,6 +25,10 @@ ja:
     log out: ログアウト
     profile: マイページ
     user_name: 作成者
+    admin: 管理画面
+    edit user: ユーザー情報の編集
+    user list: ユーザー一覧
+    update: 更新
 
   activerecord:
     attributes:
