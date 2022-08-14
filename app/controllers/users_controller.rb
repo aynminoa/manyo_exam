@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def destroy
     @task.destroy
-      redirect_to user_path, notice: "タスクを削除しました"
+      redirect_to user_path, notice: "ユーザーを削除しました"
   end
 
   private

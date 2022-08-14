@@ -29,6 +29,7 @@ ja:
     edit user: ユーザー情報の編集
     user list: ユーザー一覧
     update: 更新
+    admin_rights: 管理者権限
 
   activerecord:
     attributes:

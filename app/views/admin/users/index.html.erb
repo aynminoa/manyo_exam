@@ -5,6 +5,7 @@
     <tr>
       <th class="col-2">ID</th>
       <th class="col-2">名前</th>
+      <th>管理者権限</th>
       <th>タスク数</th>
       <th></th>
     </tr>
@@ -15,6 +16,7 @@
     <tr>
       <td><%= user.id %></td>
       <td><%= link_to user.name, [:admin, user] %></td>
+      <td><%= user.admin? ? '有' : '' %></td>
       <td><%= user.tasks.count %></td>
       <td><%= link_to t('view.edit'), edit_admin_user_path(user) %>
       <%= link_to t('view.destroy'), [:admin, user], method: :delete, data: { confirm: "#{user.name}を削除してよろしいですか?" } %></td>
