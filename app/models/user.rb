@@ -18,7 +18,7 @@ before_update :must_not_update_last_admin
   end
 
   def must_not_update_last_admin
-    if User.where(admin: :true).count == 1 && self.admin == false
+    if User.where(admin: :true).count == 1 && self.admin_change == [true,false]
       errors.add :base, '管理者は少なくとも1人必要です'
       throw :abort      
     end
