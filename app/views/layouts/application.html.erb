@@ -11,16 +11,27 @@
   </head>
 
   <body>
+    
     <header class="">
       <nav class="nav bg-primary p-3 mb-5">
-          <%= link_to t('view.new task'), new_task_path, class: "nav-link text-white" %>
-          <%= link_to "終了期限でソート", tasks_path(sort_expired: "true"), class: "nav-link text-white" %>
-          <%= link_to "優先順位でソート", tasks_path(sort_priority: "true"), class: "nav-link text-white" %>
-          <%= link_to t('view.task list'), tasks_path, class: "nav-link text-white" %>
+        <%= link_to t('view.new task'), new_task_path, class: "nav-link text-white" %>
+        <%= link_to t('view.task list'), tasks_path, class: "nav-link text-white" %>
+        <% if logged_in? %>
+          <%= link_to t('view.profile'), user_path(current_user.id), class: "nav-link text-white"  %>
+          <%= link_to t('view.log out'), session_path(current_user.id), class: "nav-link text-white", method: :delete %>
+          <%= link_to t('view.admin'), admin_users_path, class: "nav-link text-white" %>
+          <% else %>
+          <%= link_to t('view.sign up'), new_user_path, class: "nav-link text-white" %>
+          <%= link_to t('view.log in'), new_session_path, class: "nav-link text-white" %>
+        <% end %>
       </nav> 
     </header>
-    <div class="container">
 
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+  
     <%= yield %>
 
     </div>

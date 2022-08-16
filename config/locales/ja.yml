@@ -14,19 +14,36 @@ ja:
     edit: 編集
     destroy: 削除
     new task: タスク登録
-
-  # messages:
-  #   destroy:
-  #     alert: "削除してよろしいですか？"
-
+    sign up: ユーザー登録
+    name: 名前
+    email: メールアドレス
+    password: パスワード
+    password_confirmation: 確認用パスワード
+    create my account: アカウント作成
+    error: エラー
+    log in: ログイン
+    log out: ログアウト
+    profile: マイページ
+    user_name: 作成者
+    admin: 管理画面
+    edit user: ユーザー情報の編集
+    user list: ユーザー一覧
+    update: 更新
+    admin_rights: 管理者権限
 
   activerecord:
     attributes:
       task:
         title: タイトル
         content: 内容
+      user:  
+        name: 名前
+        email: メールアドレス
+        password: パスワード
 
   errors:
     format: "%{message}"
     messages: &errors_messages
       blank: "%{attribute}を入力してください"
+      invalid: "%{attribute}が無効です"
+      too_short: "%{attribute}が短すぎます"

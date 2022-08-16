@@ -1,5 +1,4 @@
 <h1><%= t('view.task list') %></h1>
-<p><%= notice %></p>
 
 <%= form_with(url: tasks_path, scope: :task, method: :get, local: true) do |form| %>
 <div class="d-flex mb-4">
@@ -14,16 +13,18 @@
   
   <table class="table mb-5 table-borderless">
     <tr class="border-bottom">
-      <th class="col-2"><%= t('view.title') %></th>
-      <th class="col-4" ><%= t('view.content') %></th>
-      <th class=""><%= t('view.deadline') %></th>
+      <th class=""><%= t('view.user_name') %></th>
+      <th class=""><%= t('view.title') %></th>
+      <th class="col-3" ><%= t('view.content') %></th>
+      <th class=""><%= link_to "終了期限▼", tasks_path(sort_expired: "true"), class: "text-reset text-decoration-none" %></th>
       <th class=""><%= t('view.status') %></th>
-      <th class=""><%= t('view.priority') %></th>
+      <th class=""><%= link_to "優先度▼", tasks_path(priority: "true"), class: "text-reset text-decoration-none" %></th>
       <th class=""></th>
     </tr>
   
   <% @tasks.each do |task| %>
     <tr class="task_row border-bottom">
+      <td class=""><%= task.user.name %></td>
       <td class=""><%= task.title %></td>
       <td class=""><%= task.content %></td>
       <td class=""><%= task.deadline %></td>
