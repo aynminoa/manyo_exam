@@ -24,6 +24,15 @@
   <td><%= @task.priority %></td>
 </tr>
 
+<tr>
+  <td>ラベル</td>
+  <td>
+    <% @task.labels.each do |label| %>
+    <%= label.name %>
+    <% end %>
+  </td>
+</tr>
+
 </table>
 
 <%= link_to t('view.to task list'), tasks_path, class: "btn btn-primary" %>

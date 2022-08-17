@@ -7,3 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(name: "test01", email: "test01@example.com", password_digest: "password")
+5.times do |i|
+  Label.create!(name: "sample#{i + 1}")
+end
