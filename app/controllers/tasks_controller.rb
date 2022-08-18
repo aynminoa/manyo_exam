@@ -7,25 +7,24 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks.order(created_at: :desc)
     if params[:sort_expired]
       @tasks = current_user.tasks.order(deadline: :desc)
-    elsif params[:sort_priority]
+    end
+    if params[:sort_priority]
       @tasks = current_user.tasks.order(priority: :desc)
     end
-
+    
     if params[:task]
-      if task_params[:title] && task_params[:status].present?
+      if task_params[:title].present? && task_params[:status].present?
         @tasks = @tasks.title_status(task_params[:title], task_params[:status])
-      end
-      if task_params[:title]
+      elsif task_params[:title].present?
         @tasks = @tasks.search_title(task_params[:title])
-      end
-      if task_params[:status].present?
+      elsif task_params[:status].present?
         @tasks = @tasks.search_status(task_params[:status])
-      end
-      if task_params[:label_id]
-          = Labeling.where(label_id: task_params[:label_id]).pluck(:task_id)
+      elsif task_params[:label_id].present?
+        task_ids = Labeling.where(label_id: task_params[:label_id]).pluck(:task_id)
+        @tasks = Task.find(task_ids)
       end
     end
-    @tasks = @tasks.page(params[:page])
+    @tasks = Kaminari.paginate_array(@tasks).page(params[:page])
   end
 
   def show
