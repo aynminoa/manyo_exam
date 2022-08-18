@@ -92,7 +92,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       click_button 'ログイン'
     end
     context 'タイトルであいまい検索をした場合' do
-      it "検索キーワードを含むタスクで絞り込まれる" do
+      it '検索キーワードを含むタスクで絞り込まれる' do
         visit tasks_path
         fill_in 'task_title', with: 'test'
         click_on '検索'
@@ -100,14 +100,14 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
     context 'ステータス検索をした場合' do
-      it "ステータスに完全一致するタスクが絞り込まれる" do
+      it 'ステータスに完全一致するタスクが絞り込まれる' do
         visit tasks_path
         select '完了', from: 'task_status'
         expect(page).to have_content '完了'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
-      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+      it '検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる' do
         FactoryBot.create(:task, user: user)
         visit tasks_path
         fill_in 'task_title', with: 'test'
