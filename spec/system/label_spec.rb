@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'ラベル付与機能', type: :system do
   let!(:user) { FactoryBot.create(:user) }
-  let!(:task) { FactoryBot.create(:task, user: user) }
   let!(:label) { FactoryBot.create(:label) }
-  let!(:labelings) {FactoryBot.create(:labeling, task: task, label: label)}
+  let!(:task) { FactoryBot.create(:task, user: user)}
+  let!(:labeling) {FactoryBot.create(:labeling, task: task, label: label)}
 
   describe '新規作成機能' do
     context 'タスク新規作成した場合' do
@@ -45,10 +45,16 @@ RSpec.describe 'ラベル付与機能', type: :system do
       click_button 'ログイン'
     end
     context 'つけたラベルで検索をした場合' do
+      before do
+        2.times do |i|
+          FactoryBot.create(:task, user: user )
+          FactoryBot.create(:second_label)
+          FactoryBot.create(:labeling, task: Task.last, label: Label.last)
+        end
+      end
       it 'ラベルが紐づくタスクが絞り込まれる' do
-        FactoryBot.create(:task, user: user )
-        FactoryBot.create(:task, user: user)
         visit tasks_path
+        # binding.pry
         task_list = all('.task_row')
         expect(task_list.count).to eq 3
         select 'test_label_1'

@@ -22,6 +22,7 @@ class TasksController < ApplicationController
       elsif task_params[:label_id].present?
         task_ids = Labeling.where(label_id: task_params[:label_id]).pluck(:task_id)
         @tasks = Task.find(task_ids)
+          # @tasks = @tasks.joins(:labels).where(labels: {id: task_params[:label_id]})
       end
     end
     @tasks = Kaminari.paginate_array(@tasks).page(params[:page])
