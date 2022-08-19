@@ -5,7 +5,7 @@ RSpec.describe 'ラベル付与機能', type: :system do
   let!(:task) { FactoryBot.create(:task, user: user)}
   let!(:labeling) {FactoryBot.create(:labeling, task: task, label: label)}
 
-  describe '新規作成機能' do
+  describe 'ラベル付与機能' do
     context 'タスク新規作成した場合' do
       before do
         visit new_session_path
@@ -13,13 +13,20 @@ RSpec.describe 'ラベル付与機能', type: :system do
           fill_in 'session_password', with: 'testpassword'
           click_button 'ログイン'
       end
-      it 'ラベルをつけられる' do
+      it 'ラベルを複数つけられる' do
+        second_label = FactoryBot.create(:second_label)
+        FactoryBot.create(:labeling, task: task, label: second_label)
+        third_label = FactoryBot.create(:third_label)
+        FactoryBot.create(:labeling, task: task, label: third_label)
         visit new_task_path
         fill_in 'task_title', with: 'ライフに行く'
         fill_in 'task_content', with: 'キムチを買う'
-        check 'task[label_ids][]'
+        check 'test_label_1'
+        check 'test_label_2'
         click_button '登録'
         expect(page).to have_content 'test_label_1'
+        expect(page).to have_content 'test_label_2'
+        expect(page).not_to have_content 'test_label_3'
       end
     end
   end
@@ -44,24 +51,22 @@ RSpec.describe 'ラベル付与機能', type: :system do
       fill_in 'session_password', with: 'testpassword'
       click_button 'ログイン'
     end
-    context 'つけたラベルで検索をした場合' do
-      before do
-        2.times do |i|
-          FactoryBot.create(:task, user: user )
-          FactoryBot.create(:second_label)
-          FactoryBot.create(:labeling, task: Task.last, label: Label.last)
-        end
-      end
-      it 'ラベルが紐づくタスクが絞り込まれる' do
+    context '任意のラベルで検索をした場合' do
+      it 'そのラベルが紐づいたタスクが絞り込まれる' do
+        second_task = FactoryBot.create(:second_task, user: user )
+        second_label = FactoryBot.create(:second_label)
+        FactoryBot.create(:labeling, task: second_task, label: second_label)
+        third_task = FactoryBot.create(:third_task, user: user )
+        FactoryBot.create(:labeling, task: third_task, label: second_label)
         visit tasks_path
-        # binding.pry
         task_list = all('.task_row')
         expect(task_list.count).to eq 3
-        select 'test_label_1'
+        select 'test_label_2', from: 'task[label_id]'
         click_on '検索'
-        expect(page).to have_content 'test_label_1'
+        expect(all('tbody tr')[1]).to have_content 'test_label_2'
+        expect(all('tbody tr')[2]).to have_content 'test_label_2'
         task_list = all('.task_row')
-        expect(task_list.count).to eq 1
+        expect(task_list.count).to eq 2
       end
     end
   end

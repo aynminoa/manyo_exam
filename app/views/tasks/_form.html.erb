@@ -31,12 +31,11 @@
     <td><%= form.select :priority, Task.priorities.keys, include_blank: "選択して下さい" %></td>
   </tr>
 
-  <tr>
-    <% Label.all.each do |label| %>
-    <td><%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
-    <%= label.name %></td>
+  <tr class="task_label_ids">
+    <td>
+      <%= form.collection_check_boxes :label_ids, Label.all, :id, :name %>
+    </td>
   </tr>
-  <% end %>
 
   </tr>
 </table>
