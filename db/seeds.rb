@@ -30,5 +30,6 @@ end
                 deadline: "now()",
                 status: '未着手',
                 priority: '低',
+                user_id: 1
                 )
 end
