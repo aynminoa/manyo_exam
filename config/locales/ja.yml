@@ -52,7 +52,12 @@ ja:
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
-
+      models:
+        task:
+          attributes:
+            user:
+              required: "ユーザーが必要です"
+        
   errors:
     format: "%{message}"
     messages: &errors_messages

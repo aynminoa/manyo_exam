@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2022_08_16_073224) do
   enable_extension "plpgsql"
 
   create_table "labelings", force: :cascade do |t|
-    t.bigint "task_id", null: false
-    t.bigint "label_id", null: false
+    t.bigint "task_id"
+    t.bigint "label_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["label_id"], name: "index_labelings_on_label_id"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_08_16_073224) do
     t.date "deadline", default: -> { "now()" }, null: false
     t.integer "status", default: 0, null: false
     t.integer "priority", default: 0, null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["title"], name: "index_tasks_on_title"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
