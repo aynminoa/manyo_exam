@@ -11,8 +11,8 @@
 
 <table class="table table-borderless mb-4">
   <tr class="task_title">
-    <td class="col-2"><%= form.label t('view.title') %></td>
-    <td class="col-10"><%= form.text_field :title %></td>
+    <td class="col-3"><%= form.label t('view.title') %></td>
+    <td class="col-9"><%= form.text_field :title %></td>
   </tr>
   <tr class="task_content">
     <td><%= form.label t('view.content') %></td>
@@ -30,7 +30,9 @@
     <td><%= form.label t('view.priority') %></td>
     <td><%= form.select :priority, Task.priorities.keys, include_blank: "選択して下さい" %></td>
   </tr>
-
 </table>
+
+  <p><%= form.collection_check_boxes :label_ids, Label.all, :id, :name %>
+  </p>
 <%= form.submit t('view.create task'), class: "btn btn-outline-dark mb-3" %>
 <% end %>

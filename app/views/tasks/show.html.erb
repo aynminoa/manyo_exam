@@ -1,4 +1,3 @@
-<p><%= notice %></p>
 <h1><%= t('view.task details') %></h1>
 
 <table class="table table-borderless mb-5">
@@ -22,6 +21,15 @@
 <tr>
   <td><%= t('view.priority') %></td>
   <td><%= @task.priority %></td>
+</tr>
+
+<tr>
+  <td>ラベル</td>
+  <td>
+    <% @task.labels.each do |label| %>
+    <%= label.name %>
+    <% end %>
+  </td>
 </tr>
 
 </table>

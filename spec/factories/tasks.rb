@@ -15,4 +15,13 @@ FactoryBot.define do
     status { '着手中'}
     priority { '中'}
   end
+
+  factory :third_task, class: Task do
+    title { 'test_title3' }
+    content { 'test_content3' }
+    deadline { 'test_deadline3'}
+    status { '着手中'}
+    priority { '中'}
+  end
+
 end
